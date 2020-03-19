@@ -6,13 +6,14 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import PageWrapper from './components/PageWrapper';
 import Home from './components/pages/Home';
 import About from './components/pages/About';
+import Contact from './components/pages/Contact';
 
 function App() {
   return (
     <Router>
       <PageWrapper >
 
-        <Route
+        <Route // or switch
         exact = {true}
           path="/"
           component={Home}
@@ -23,7 +24,10 @@ function App() {
         component={About}
         />
 
-        
+      <Route 
+        path = '/contact'
+        component={Contact}
+        />
 
 
 
