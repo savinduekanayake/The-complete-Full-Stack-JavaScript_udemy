@@ -35,6 +35,22 @@ boot(app, __dirname, function(err) {
     app.start();
 });
 
+console.log(Object.keys(app.models));
+
+// app.models.user.find((err,result)=>{
+//   if(result.length === 0){
+//     const user = {
+//       email : 'nick@nick.com',
+//       password: 'test',
+//       username: 'nick'
+//     };
+
+//     app.models.user.create(user,(err,result)=>{
+//       console.log("Tried to create user",err,result);
+//     })
+//   }
+// })
+
 app.models.user.afterRemote('create',(ctx,user,next)=>{
   console.log("New User is",user);
 
@@ -46,10 +62,14 @@ app.models.user.afterRemote('create',(ctx,user,next)=>{
     if(!err && result){
       console.log("created new profile",result);
     }else{
-      console.log('There is an error',err)
+      console.log('There is an error',err);
     }
     next();
   });
 
   
 });
+
+// app.middleware('auth',loopback.token({
+//   model: app.models.customAccessToken,
+// }));
