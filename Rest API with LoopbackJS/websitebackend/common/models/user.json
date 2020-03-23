@@ -1,22 +1,16 @@
 {
-  "name": "Profile",
-  "base": "PersistedModel",
+  "name": "user",
+  "base": "User",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "first_name": {
+    "email": {
       "type": "string"
     },
-    "last_name": {
+    "password": {
       "type": "string"
-    },
-    "created_at": {
-      "type": "date"
-    },
-    "age": {
-      "type": "number"
     }
   },
   "validations": [],

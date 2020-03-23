@@ -1,22 +1,16 @@
 {
-  "name": "Profile",
+  "name": "CoffeeShop",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "first_name": {
+    "name": {
       "type": "string"
     },
-    "last_name": {
+    "city": {
       "type": "string"
-    },
-    "created_at": {
-      "type": "date"
-    },
-    "age": {
-      "type": "number"
     }
   },
   "validations": [],
