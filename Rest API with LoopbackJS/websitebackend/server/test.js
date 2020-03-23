@@ -77,6 +77,8 @@ var filter = {
 }
 */
 
+/*
+//quary a instance
 var filter = {
     where: {
         name:{like:"SK"},
@@ -85,11 +87,53 @@ var filter = {
     }, //kind of like MYSQL where clause
     order: 'id ASC', //order by
     limit: 10, //how many to return
-    
+    skip: 3, //skip first 3 result
+    fields: {
+        email:true
+    }
 }
-
-
 
 models.Profile.find(filter, (err,found)=>{
     console.log("found?",err,found)
 })
+
+
+models.Profile.findById("5e792d8346d1b85ad87addf3",filter, (err,found)=>{
+    console.log("found?",err,found)
+})
+*/
+
+
+/*
+//delete data
+var filter = {
+    where: {
+        name:{like:"SK"},
+        email: {like:'sk'},
+        // postCount: {gt:10}
+    }, //kind of like MYSQL where clause
+    order: 'id ASC', //order by
+    limit: 10, //how many to return
+    skip: 3, //skip first 3 result
+    fields: {
+        email:true
+    }
+}
+
+models.Profile.findById("5e792d8346d1b85ad87addf3", (err,found)=>{
+    console.log("found?",err,found);
+    found.destroy();
+});
+
+models.Profile.destroyAll(filter.where, (err,found)=>{
+    console.log("found?",err,found);
+    
+});
+models.Profile.destroyById("5e7925160e47067708dc214c", (err,found)=>{
+    console.log("found?",err,found);
+    
+});
+*/
+
+
+

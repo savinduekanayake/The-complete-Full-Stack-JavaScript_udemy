@@ -8,10 +8,10 @@
   "properties": {},
   "validations": [],
   "relations": {
-    "user" : {
-      "type" : "belongsTo",
+    "user": {
+      "type": "belongsTo",
       "model": "user",
-      "foreignKey":"userId"
+      "foreignKey": "userId"
     }
   },
   "acls": [],
