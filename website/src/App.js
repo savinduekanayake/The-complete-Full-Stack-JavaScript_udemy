@@ -8,30 +8,52 @@ import Home from './components/pages/Home';
 import About from './components/pages/About';
 import Contact from './components/pages/Contact';
 
+import AdminWrapper from'./components/AdminWrapper';
+import Login from './components/pages/Login';
+
 function App() {
   return (
     <Router>
-      <PageWrapper >
+
+      <Route
+        path="/admin"
+        render={props=>(
+          <AdminWrapper>
+            <Login />
+          </AdminWrapper>
+        )}
+      />
+
 
         <Route // or switch
         exact = {true}
           path="/"
-          component={Home}
+          render={props=>(
+            <PageWrapper>
+              <Home {...props} />
+            </PageWrapper>
+          )}
         />
 
       <Route 
         path = '/about'
-        component={About}
+        render={props=>(
+          <PageWrapper>
+            <About {...props} />
+          </PageWrapper>
+        )}
         />
 
       <Route 
         path = '/contact'
-        component={Contact}
+        render={props=>(
+          <PageWrapper>
+            <Contact {...props} />
+          </PageWrapper>
+        )}
         />
 
 
-
-      </PageWrapper>
     </Router>
   );
 }
