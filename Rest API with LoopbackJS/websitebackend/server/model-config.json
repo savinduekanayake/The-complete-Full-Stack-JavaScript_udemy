@@ -51,5 +51,9 @@
   "Category": {
     "dataSource": "db",
     "public": true
+  },
+  "PostImage": {
+    "dataSource": "myFile",
+    "public": true
   }
 }
