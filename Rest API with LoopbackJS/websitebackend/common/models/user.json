@@ -26,9 +26,9 @@
       "foreignKey": "userId"
     },
     "Post": {
-      "type":"hasMany",
-      "model":"Post",
-      "foreignKey":""
+      "type": "hasMany",
+      "model": "Post",
+      "foreignKey": ""
     }
   },
   "acls": [],
