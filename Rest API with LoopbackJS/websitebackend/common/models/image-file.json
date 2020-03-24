@@ -8,16 +8,7 @@
   "properties": {},
   "validations": [],
   "relations": {
-    "Post": {
-      "type": "belongsTo",
-      "model": "Post",
-      "foreignKey": "postId"
-    },
-    "user": {
-      "type": "belongsTo",
-      "model": "user",
-      "foreignKey": "userId"
-    }
+    
   },
   "acls": [],
   "methods": {}

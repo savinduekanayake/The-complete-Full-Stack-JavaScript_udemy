@@ -1,5 +1,5 @@
 {
-  "name": "PostImage",
+  "name": "PostImage", 
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -14,7 +14,18 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "Post": {
+      "type": "belongsTo",
+      "model": "Post",
+      "foreignKey": "postId"
+    },
+    "user": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "userId"
+    }
+  },
   "acls": [
     {
       "accessType": "WRITE",
