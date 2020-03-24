@@ -32,8 +32,8 @@
     },
     "PostImage": {
       "type": "hasMany",
-      "model":"PostImage",
-      "foreignKey":""
+      "model": "PostImage",
+      "foreignKey": ""
     }
   },
   "acls": [],
