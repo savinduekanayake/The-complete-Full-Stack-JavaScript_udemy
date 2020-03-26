@@ -3,7 +3,11 @@ import Field from '../Common/Feild';
 import {withFormik} from 'formik';
 import * as Yup from 'yup';
 
+//after redux
 import {connect} from 'react-redux';
+
+import * as AuthActions from '../../store/actions/authActions';
+
 
 const fields = [
     {name: 'email', elementName:'input', type:'email',placeholder:'Your email'},
@@ -20,7 +24,10 @@ class Login extends Component{
                             <h1>Login</h1>
                         </div>
                         <div className="row">
-                            <form onSubmit={this.props.handleSubmit}>
+                            <form onSubmit={e => {
+                                e.preventDefault();
+                                this.props.login(this.props.values.email,this.props.values.password);
+                                }}>
                                 {fields.map((f,i)=>{
                                     return (
                                         <div className='col-md-12'>
@@ -60,12 +67,15 @@ const mapStateToProps = state =>{
 const mapDispatchToProps = dispatch =>{
     return {
         login: (email, pass)=>{
-            console.log('Login in user',email);
+            dispatch(AuthActions.login(email,pass));
         }
     }
 }
 
-export default connect(withFormik({
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(withFormik({
     mapPropsToValues: ()=> ({
         email: '',
         password: ''
@@ -74,7 +84,8 @@ export default connect(withFormik({
         email:Yup.string().email('email is invalid').required('You need to login with email'),
         password: Yup.string().required('You need to enter your password')
     }),
-    handleSubmit: (values, {setSubmitting}) => {
-        console.log('login attemp',values)
+    handleSubmit: (values, {setSubmitting}, login) => {
+        console.log('login attemp',values);
+        // login(values.email,values.password); //this.props.login
     }
-}))(Login);
+})(Login));

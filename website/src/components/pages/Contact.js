@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Field from '../Common/Feild';
 
 //form submit
-import {withFormik} from 'formik';
+import { withFormik } from 'formik';
 //validate
 import * as Yup from 'yup';
 
@@ -37,7 +37,7 @@ class Contact extends Component {
                     </div>
                     <div className="row">
                         <div className="col-lg-12">
-                            <form  name="sentMessage" novalidate="novalidate" onSubmit={this.props.handleSubmit}>
+                            <form name="sentMessage" novalidate="novalidate" onSubmit={this.props.handleSubmit}>
                                 <div className="row">
 
 
@@ -52,9 +52,9 @@ class Contact extends Component {
                                                         name={field.name}
                                                         onChange={this.props.handleChange} //handleChange is a formic fuction
                                                         onBlur={this.props.handleBlur} // for this make touched = true
-                                                        touched = {(this.props.touched[field.name])} 
+                                                        touched={(this.props.touched[field.name])}
                                                         errors={this.props.errors[field.name]}
-                                                        
+
                                                     />
                                                 })}
                                             </div>
@@ -64,10 +64,10 @@ class Contact extends Component {
                                     <div className="clearfix"></div>
                                     <div className="col-lg-12 text-center">
                                         <div id="success"></div>
-                                        <button 
-                                        // id="sendMessageButton" 
-                                        className="btn btn-primary btn-xl text-uppercase" 
-                                        type="submit"
+                                        <button
+                                            // id="sendMessageButton" 
+                                            className="btn btn-primary btn-xl text-uppercase"
+                                            type="submit"
                                         // onClick={e => this.submitForm(e)}
                                         >Send Message</button>
                                     </div>
@@ -83,26 +83,26 @@ class Contact extends Component {
 }
 
 export default withFormik({
-    mapPropsToValues: ()=> ({
+    mapPropsToValues: () => ({
         name: '',
-        email:'',
+        email: '',
         phone: '',
-        message:''
+        message: ''
     }),
     validationSchema: Yup.object().shape({
         name: Yup.string().min(3, 'Name must 3 characters long ').required('You must give us your name.'),
         email: Yup.string().email('you need to give us valid email.').required('We need your email'),
         phone: Yup.string()
-            .min(10,'Please provide 10 digit phone number')
-            .max(15,'Please enter valid phone number')
+            .min(10, 'Please provide 10 digit phone number')
+            .max(15, 'Please enter valid phone number')
             .required('We need a phone number to rech you up.'),
         message: Yup.string()
-            .min(20,'you should us provide more information details.')
+            .min(20, 'you should us provide more information details.')
             .required('Message is required.')
     }),
 
-    handleSubmit: (values, {setSubmitting}) =>{
-        console.log("VALUES",values)
+    handleSubmit: (values, { setSubmitting }) => {
+        console.log("VALUES", values)
         alert('You submited!', JSON.stringify(values))
     }
 })(Contact);
