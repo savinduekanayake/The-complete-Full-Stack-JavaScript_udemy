@@ -24,14 +24,14 @@ class App extends Component {
           render={props=>{
             return (
               <div>
-                {this.props.auth.token ?
+                {/* {this.props.auth.token ? */}
                 <AdminWrapper>
                   <Dashboard />
                 </AdminWrapper>
-                : 
+                {/* : 
                 <LoginWrapper>
                   <Login />
-                </LoginWrapper>
+                </LoginWrapper> */}
                 }
               </div>
               
