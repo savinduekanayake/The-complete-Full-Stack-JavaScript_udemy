@@ -1,10 +1,57 @@
 import React , {Component} from 'react';
+import TableView from '../../Common/TableView';
+
+import {connect} from 'react-redux';
+import * as AdminActions from '../../../store/actions/AdminActions';
+
+const colums = [
+    {label:'ID', name:'id'},
+    {label:'Email', name:'email'},
+    {label:'Name', name:'name'},
+
+]
+
 
 class Users extends Component {
+
+    componentDidMount(){
+        this.props.getUsers(this.props.auth.token)
+    }
+
+
     render(){
+
+        const users = this.props.admin.users;
+
         return(
-            <h1>Users</h1>
+            <div>
+                <h1>Users</h1>
+                <TableView 
+                    colums={colums}
+                    rows={users}
+                />
+            </div>
+            
         )
     }
 }
-export default Users;
+
+const mapStateToProps = state => {
+    return {
+        auth: state.auth,
+        admin: state.admin
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        getUsers: (token) =>{
+            dispatch(AdminActions.getUsers(token));
+        }
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Users);
