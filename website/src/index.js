@@ -5,20 +5,29 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 //redux
-import {createStore,applyMiddleware} from 'redux';
+// import {createStore,applyMiddleware} from 'redux';
 import rootReducer from './store/reducers';
 import {Provider} from 'react-redux';
-import thunk from 'redux-thunk';
+// import thunk from 'redux-thunk';
+
+// persist -> using local storage
+import configureStore from './store/configureStore';
+import {PersistGate} from 'redux-persist/integration/react';
+
+const {store,persistor} = configureStore();
 
 
-const store = createStore(
-    rootReducer,
-    applyMiddleware(thunk)
-    );
+
+// const store = createStore(
+//     rootReducer,
+//     applyMiddleware(thunk)
+//     );
 
 ReactDOM.render(
     <Provider store={store}>
-        <App />
+        <PersistGate loading={null} persistor={persistor}>
+            <App />
+        </PersistGate>
     </Provider>
     , document.getElementById('root'));
 

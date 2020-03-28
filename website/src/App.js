@@ -11,7 +11,11 @@ import Contact from './components/pages/Contact';
 
 import AdminWrapper from'./components/AdminWrapper';
 import Login from './components/pages/Login';
-import Dashboard from './components/pages/Dashboard';
+
+// Admin pages
+import Dashboard from './components/pages/Admin/Dashboard';
+import Users from './components/pages/Admin/Users';
+import Posts from './components/pages/Admin/Posts';
 
 import LoginWrapper from './components/LoginWrapper';
 class App extends Component {
@@ -20,18 +24,57 @@ class App extends Component {
       <Router>
 
         <Route
+          path='/admin/users'
+          render={props=>{
+            return (
+              <div>
+                {this.props.auth.token ?
+                <AdminWrapper>
+                  <Users />
+                </AdminWrapper>
+                 : 
+                <LoginWrapper>
+                  <Login />
+                </LoginWrapper> 
+                }
+              </div>
+            )
+          }}
+        />
+
+        <Route
+          path='/admin/posts'
+          render={props=>{
+            return (
+              <div>
+                {this.props.auth.token ?
+                <AdminWrapper>
+                  <Posts />
+                </AdminWrapper>
+                : 
+                <LoginWrapper>
+                  <Login />
+                </LoginWrapper>
+                }
+              </div>
+            )
+          }}
+        />
+
+        <Route
+        exact={true}
           path="/admin"
           render={props=>{
             return (
               <div>
-                {/* {this.props.auth.token ? */}
+                {this.props.auth.token ?
                 <AdminWrapper>
                   <Dashboard />
                 </AdminWrapper>
-                {/* : 
+                : 
                 <LoginWrapper>
                   <Login />
-                </LoginWrapper> */}
+                </LoginWrapper>
                 }
               </div>
               

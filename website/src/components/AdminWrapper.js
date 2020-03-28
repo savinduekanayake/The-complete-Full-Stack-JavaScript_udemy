@@ -29,6 +29,9 @@ import Sidebar from './Common/SideBar';
 const drawerWidth = 240;
 
 const styles = theme => ({
+    root: {
+        display: 'flex'
+    },
     toolbar: {
         paddingRight: 24
     },
@@ -47,6 +50,7 @@ const styles = theme => ({
             duration: theme.transitions.duration.enteringScreen
         }),
     },
+    appBarSpace: theme.mixins.toolbar,
     drawerPaper: {
         position: 'relative',
         whiteSpace : 'noWrap',
@@ -70,6 +74,12 @@ const styles = theme => ({
         justifyContent: 'flex-end',
         padding:'0 8px',
         ...theme.mixins.toolbar
+    },
+    content: {
+        flexFrow: 1,
+        padding: theme.spacing.unit * 3,
+        height: '100vh',
+        overFlow: 'auto'
     }
     
 });
@@ -97,7 +107,7 @@ class AdminWrapper extends Component{
     render(){
         const {classes} = this.props;
         return(
-            <div id="admin-page">
+            <div id="admin-page" className={classes.root}>
 
                 <AppBar className={classNames(classes.appBar, this.state.open && classes.appBarShift )}>
                     <ToolBar className={classes.toolbar}>
@@ -125,13 +135,18 @@ class AdminWrapper extends Component{
                             <ChevronLeftIcon />
                         </IconButton>
                     </div>
-                    
+
                     <Divider />
 
                     <Sidebar />
                 </Drawer>
 
-                {this.props.children}
+
+                <main className={classes.content}>
+                    <div className={classes.appBarSpace} />
+                    {this.props.children}
+                </main>
+                
             </div>
         )
     }
