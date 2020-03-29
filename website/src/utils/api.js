@@ -21,6 +21,13 @@ const  API = {
         .then(res => {
             success(res);
         })
+    },
+    addPost: (post,token,success) => {
+        axios.post(`${host}/api/Posts?access_token=${token}`,post)
+        .then(res =>{
+            console.log('post added..')
+            success(res);
+        })
     }
 }
 

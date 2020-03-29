@@ -44,7 +44,8 @@ class App extends Component {
         />
 
         <Route 
-          path='/admin/posts/add'
+          exact={true}
+          path='/admin/posts/:view'
           render={props => {
             return (
               <div>
@@ -65,6 +66,7 @@ class App extends Component {
 
 
         <Route
+        exact={true}
           path='/admin/posts'
           render={props=>{
             return (

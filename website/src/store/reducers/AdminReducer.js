@@ -4,6 +4,7 @@ const defaultState = {
 }
 
 const admin = (state = defaultState,action) => {
+    console.log('came to admin reducer...')
     switch(action.type){
         case 'GOT_USERS':
             return {
@@ -14,6 +15,11 @@ const admin = (state = defaultState,action) => {
             return {
                 ...state,
                 posts: action.payload
+            }
+        case 'POST_ADDED':
+            return {
+                ...state,
+                posts: state.posts.concat(action.payload)
             }
         default: 
             return state
