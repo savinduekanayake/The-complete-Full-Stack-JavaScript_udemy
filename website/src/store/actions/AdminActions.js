@@ -26,9 +26,32 @@ export const getPosts = (token) =>{
 export const addPost = (post,token) =>{
     return dispatch =>{
         API.addPost(post,token,res=>{
-            console.log('came to admin action...')
+            // console.log('came to admin action...')
             dispatch({
                 type:'POST_ADDED',
+                payload:res.data
+            })
+        })
+    }
+}
+
+export const getSinglePost = (id,token) => {
+    return dispatch => {
+        API.getSinglePost(id,token, res => {
+            dispatch({
+                type: 'GOT_SINGLE_POST',
+                payload: res.data
+            })
+        })
+    }
+}
+
+export const updatePost = (post,token) => {
+    return dispatch =>{
+        API.updatePost(post,token,res=>{
+            // console.log('came to admin action...')
+            dispatch({
+                type:'UPDATED_POST',
                 payload:res.data
             })
         })
