@@ -53,7 +53,18 @@ export const updatePost = (post,token) => {
             dispatch({
                 type:'UPDATED_POST',
                 payload:res.data
-            })
+            });
+        })
+    }
+}
+
+export const uploadImage = (data,token,postId,userId) => {
+    return dispatch => {
+        API.uploadImage(data,token,postId,userId, res => {
+            dispatch({
+                type: 'UPLOADED_IMAGE',
+                payload: res.data
+            });
         })
     }
 }

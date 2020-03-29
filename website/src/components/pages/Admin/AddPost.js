@@ -16,7 +16,7 @@ import FormControl from '@material-ui/core/FormControl';
 import {FormikTextField,FormikSelectField} from 'formik-material-fields';
 import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
-
+import ImageIcon from '@material-ui/icons/Image'
 
 
 
@@ -24,6 +24,12 @@ import SaveIcon from '@material-ui/icons/Save';
 import { withFormik, Form } from 'formik';
 //validate
 import * as Yup from 'yup';
+import { $CombinedState } from 'redux';
+
+import API from '../../../utils/api';
+
+//Jquery
+/* global $ */ 
 
 
 const styles = theme => ({
@@ -47,6 +53,11 @@ const styles = theme => ({
         height: '100%',
         margin: theme.spacing.unit * 1,
         padding: theme.spacing.unit * 3
+    },save: {
+        margin: theme.spacing.unit * 2
+    },
+    postImage: {
+        width:'100%'
     }
 });
 
@@ -70,6 +81,12 @@ class AddPost extends Component {
         if(this.props.match.params.view === 'edit' && this.props.match.params.id ){
             this.props.getSinglePost(this.props.match.params.id, this.props.auth.token)
         }
+    }
+
+    uploadImage = (e) => {
+        const data = new FormData();
+        data.append('file',e.target.files[0], new Date().getTime().toString() + e.target.files[0].name );
+        this.props.uploadImage(data,this.props.auth.token, this.props.admin.post.id, this.props.auth.user.userId)
     }
 
 
@@ -114,15 +131,33 @@ class AddPost extends Component {
                             ]}
                             fullWidth
                         />
+                        <div className={classes.save}>
+                            <Button 
+                                varant="contained" 
+                                color="secondary"
+                                onClick={e => {
+                                    this.props.handleSubmit();
+                                }}
+                            ><SaveIcon />Save</Button>
+                        </div>
 
-                        <Button 
-                            varant="contained" 
-                            color="secondary"
-                            onClick={e => {
-                                this.props.handleSubmit();
-                            }}
-                        ><SaveIcon />Save</Button>
+                        {this.props.admin.post.PostImage ?
+                            this.props.admin.post.PostImage.length > 0 ?
+                                <img src={API.makeFileURL(this.props.admin.post.PostImage[0].url,this.props.auth.token)} className={classes.postImage} />
+                            :null
+                        : null}
 
+                        <div>
+                            
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={e => {
+                                    $('.MyFile').trigger('click');
+                                }}
+                                ><ImageIcon />Upload Post Image</Button>
+                            <input type="file" style={{display: 'none'}} className="MyFile" onChange={this.uploadImage} />
+                        </div>
                     </Paper>
                 </Form>
                 
@@ -146,6 +181,9 @@ const mapDispatchToProps = dispatch =>({
     },
     getSinglePost: (id,token) => {
         dispatch(AdminActions.getSinglePost(id,token));
+    },
+    uploadImage: (data,token,postId,userId) => {
+        dispatch(AdminActions.uploadImage(data,token,postId,userId));
     }
 })
 
