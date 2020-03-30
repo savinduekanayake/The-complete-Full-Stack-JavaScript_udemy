@@ -12,6 +12,9 @@ import Contact from './components/pages/Contact';
 import AdminWrapper from'./components/AdminWrapper';
 import Login from './components/pages/Login';
 
+import Blog from './components/pages/Blog';
+import Single from './components/pages/Single';
+
 // Admin pages
 import Dashboard from './components/pages/Admin/Dashboard';
 import Users from './components/pages/Admin/Users';
@@ -135,6 +138,26 @@ class App extends Component {
                 <Home {...props} />
               </PageWrapper>
             )}
+          />
+
+        <Route 
+          path = '/blog/:slug'
+          exact={true}
+          render={props=>(
+            <PageWrapper>
+              <Single {...props} />
+            </PageWrapper>
+          )}
+          />
+
+        <Route 
+          path = '/blog'
+          exact={true}
+          render={props=>(
+            <PageWrapper>
+              <Blog {...props} />
+            </PageWrapper>
+          )}
           />
 
         <Route 
