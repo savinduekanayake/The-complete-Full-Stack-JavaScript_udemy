@@ -1,12 +1,19 @@
 import React,{Component} from 'react';
 import API from '../../utils/api';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+import  *  as SiteActions from '../../store/actions/siteActions';
 
 class BlogItem extends Component {
     render(){
         return (
             <div className="col-md-4 col-sm-6 portfolio-item">
-                <Link className="portfolio-link"  to={`/blog/${this.props.post.slug}`}>
+                <Link 
+                    className="portfolio-link"  
+                    to={`/blog/${this.props.post.slug}`}
+                    onClick={e => this.props.setPostData(this.props.post)}
+                    >
+
                     <div className="portfolio-hover">
                         <div className="portfolio-hover-content">
                             <i className="fas fa-plus fa-3x"></i>
@@ -22,7 +29,10 @@ class BlogItem extends Component {
                 </Link>
 
                 {/* palleha ekata link eka danna une image eka pennanne nathi nisa */}
-                <Link to={`/blog/${this.props.post.slug}`}> 
+                <Link 
+                    to={`/blog/${this.props.post.slug}`}
+                    onClick={e => this.props.setPostData(this.props.post)}
+                    > 
                 <div className="portfolio-caption">
                     <h4>{this.props.post.title}</h4>
                     <p className="text-muted">{this.props.post.slug}</p>
@@ -34,4 +44,17 @@ class BlogItem extends Component {
     }
 }
 
-export default BlogItem;
+const mapStateToProps = state => ({
+
+})
+
+const mapDispatchToProps = dispatch => ({
+    setPostData: (post) => {
+        dispatch(SiteActions.setPostData(post));
+    }
+})
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(BlogItem);

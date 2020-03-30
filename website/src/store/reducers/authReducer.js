@@ -1,6 +1,7 @@
 const defaultState = {
     user: {},
-    token: null
+    token: null,
+    error: null
 }
 
 const auth = (state = defaultState, action) => {
@@ -10,6 +11,11 @@ const auth = (state = defaultState, action) => {
                 ...state,
                 user: action.payload,
                 token: action.payload.token
+            }
+        case 'SHOW_ERROR':
+            return {
+                ...state,
+                error: action.payload
             }
         default:
             return state

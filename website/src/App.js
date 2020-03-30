@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
 import {connect} from 'react-redux';
 
 
@@ -14,6 +14,7 @@ import Login from './components/pages/Login';
 
 import Blog from './components/pages/Blog';
 import Single from './components/pages/Single';
+import Signup from './components/pages/Signup';
 
 // Admin pages
 import Dashboard from './components/pages/Admin/Dashboard';
@@ -22,10 +23,29 @@ import Posts from './components/pages/Admin/Posts';
 import AddPost from './components/pages/Admin/AddPost';
 
 import LoginWrapper from './components/LoginWrapper';
+
 class App extends Component {
   render(){
     return (
       <Router>
+
+        <Route 
+          exact={true}
+          path="/signup"
+          render={props =>{
+            if(this.props.auth.token){
+              return (
+                <Redirect to="/" />
+              )
+            }else{
+              return(
+                <LoginWrapper>
+                  <Signup />
+                </LoginWrapper>
+              )
+            }
+          }}
+          />
 
         <Route
           path='/admin/users'
