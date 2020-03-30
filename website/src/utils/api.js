@@ -19,6 +19,12 @@ const  API = {
             success(res);
         });
     },
+    getPostCount: (success) => {
+        axios.get(`${host}/api/Posts/count`)
+        .then(res => {
+            success(res);
+        })
+    },
     getPosts: (token,success) => {
         axios.get(`${host}/api/Posts?access_token=${token}`)
         .then(res => {
