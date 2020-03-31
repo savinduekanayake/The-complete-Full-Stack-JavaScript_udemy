@@ -43,3 +43,14 @@ export const getPostBySlug = (slug,token) => {
         })
     }
 }
+
+export const postComment = (comment,token) => {
+    return dispatch => {
+        API.postComment(comment, token, res => {
+            dispatch({
+                type:'ADDED_COMMENT',
+            payload: res.payload
+            })
+        })
+    }
+}

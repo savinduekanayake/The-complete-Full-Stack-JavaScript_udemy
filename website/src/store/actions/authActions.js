@@ -13,6 +13,13 @@ export const login = (email,pass) => {
                     userId: res.data.userId
                 }
             }) 
+//getUsers wenna puluwan
+            API.getUser(res.data.userId,res.data.id, res2 => {
+                dispatch({
+                    type: 'AFTER_LOGIN',
+                    payload: res2.data
+                })
+            })
         })
     }
     

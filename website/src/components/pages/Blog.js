@@ -47,6 +47,7 @@ class Blog extends Component {
                     <div className="row">
                         <div className="col-md-12">
                             <div className="text-center">
+
                                 {this.props.site.postCount > this.props.site.posts.length ?
                                     <button className="btn btn-default" onClick={e => {
                                         this.props.getPosts(this.props.site.posts.length)

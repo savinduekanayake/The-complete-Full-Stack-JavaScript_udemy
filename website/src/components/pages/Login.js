@@ -86,6 +86,6 @@ export default connect(
     }),
     handleSubmit: (values, {setSubmitting}, login) => {
         console.log('login attemp',values);
-        login(values.email,values.password); //this.props.login
+        // login(values.email,values.password); //this.props.login
     }
 })(Login));

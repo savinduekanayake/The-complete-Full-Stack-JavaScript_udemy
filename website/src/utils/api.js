@@ -13,6 +13,17 @@ const API = {
                 success(res);
             });
     },
+    getUser: (userId,token,success) => {
+        axios.get(`${host}/api/users/${userId}?access_token=${token}`,{
+            params: {
+                filter: {
+                    include: 'Profile'
+                }
+            }
+        }).then(res => {
+            success(res);
+        })
+    },
     register:(name,email,pass, success) =>{
         axios.post(`${host}/api/users`,{name:name,email:email,password:pass})
         .then(res => {
@@ -98,10 +109,25 @@ const API = {
         axios.get(`${host}/api/Posts/findOne?access_token=${token}`,{
             params:{
                 filter:{
-                    where: {slug:slug}
+                    where: {slug:slug},
+                    include: {Comments: 'Profile'}
                 }
             }
         }).then(res=>{
+            success(res);
+        })
+    },
+    postComment: (comment,token, success) => {
+        axios.post(`${host}/api/Comments?access_token=${token}`,comment
+         , {
+            params: {
+                filter : {
+                    include: 'Profile'
+                }
+            }
+        }
+        )
+        .then(res => {
             success(res);
         })
     }
