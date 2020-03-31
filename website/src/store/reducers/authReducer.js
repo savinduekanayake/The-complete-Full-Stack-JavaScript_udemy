@@ -18,12 +18,12 @@ const auth = (state = defaultState, action) => {
                 ...state,
                 error: action.payload
             }
-        // case 'AFTER_LOGIN':
-        //     return {
-        //         ...state,
-        //         user: action.payload,
-        //         profile: action.payload.Profile
-        //     }
+        case 'AFTER_LOGIN':
+            return {
+                ...state,
+                user: action.payload,
+                profile: action.payload.Profile
+            }
         default:
             return state
     }

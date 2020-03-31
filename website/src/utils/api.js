@@ -1,6 +1,12 @@
 import axios from 'axios';
 
-const host = 'http://localhost:8080';
+let host;
+if(process.env.NODE_ENV === 'development'){
+    host = 'http://localhost:8080';
+}else{
+    host = 'http://demoapi.savindu.com';
+}
+
 
 const API = {
     makeFileURL: (url, token) => {
@@ -114,6 +120,17 @@ const API = {
                 }
             }
         }).then(res=>{
+            success(res);
+        })
+    },
+    getCommentById: (commentId, token, success) => {
+        axios.get(`${host}/api/Comments/${commentId}?access_token=${token}`,{
+            params: {
+                filter: {
+                    include: 'Profile'
+                }
+            }
+        }).then(res => {
             success(res);
         })
     },

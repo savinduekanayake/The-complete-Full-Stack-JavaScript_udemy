@@ -47,10 +47,16 @@ export const getPostBySlug = (slug,token) => {
 export const postComment = (comment,token) => {
     return dispatch => {
         API.postComment(comment, token, res => {
-            dispatch({
-                type:'ADDED_COMMENT',
-            payload: res.payload
-            })
+            if(res.status === 200){
+                API.getCommentById(res.data.id,token, res2 => {
+                    dispatch({
+                        type:'ADDED_COMMENT',
+                    payload: res.payload
+                    })
+                })
+                
+            }
+            
         })
     }
 }
